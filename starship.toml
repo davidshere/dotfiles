@@ -1,5 +1,4 @@
 format = """
-[░▒▓](#a9a1e1)\
 [ $os $username ](bg:#a9a1e1 fg:#090c0c)\
 [](bg:#7aa2f7 fg:#a9a1e1)\
 [ $directory ](bg:#7aa2f7 fg:#090c0c)\
