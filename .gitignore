@@ -1,0 +1,6 @@
+# nvim generated files
+nvim/.cache/
+nvim/plugin/
+
+# OS
+.DS_Store

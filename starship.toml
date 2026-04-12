@@ -1,0 +1,46 @@
+format = """
+[░▒▓](#a9a1e1)\
+[ $os $username ](bg:#a9a1e1 fg:#090c0c)\
+[](bg:#7aa2f7 fg:#a9a1e1)\
+[ $directory ](bg:#7aa2f7 fg:#090c0c)\
+[](fg:#7aa2f7 bg:#394b70)\
+[ $git_branch $git_status ](bg:#394b70 fg:#7dcfff)\
+[](fg:#394b70 bg:#1a1b26)\
+[ $time ](bg:#1a1b26)\
+[ ](fg:#1a1b26)\
+"""
+
+[username]
+show_always = true
+style_user = "bg:#a9a1e1 fg:#090c0c"
+style_root = "bg:#a9a1e1 fg:#090c0c"
+format = "[$user]($style)"
+
+[directory]
+style = "bg:#7aa2f7 fg:#090c0c"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "bg:#394b70"
+format = "[[ $symbol $branch ](fg:#7dcfff bg:#394b70)]($style)"
+
+[git_status]
+style = "bg:#394b70"
+format = "[[($all_status$ahead_behind )](fg:#7dcfff bg:#394b70)]($style)"
+
+[time]
+disabled = false
+time_format = "%H:%M"
+style = "bg:#1a1b26 fg:#7aa2f7"
+format = "[$time]($style)"
+
+[os]
+disabled = false
+style = "bg:#a9a1e1 fg:#090c0c"
+
+[os.symbols]
+Macos = ""
+Linux = ""
