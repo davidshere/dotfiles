@@ -5,7 +5,7 @@ DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo "==> Installing brew packages..."
 brew install fzf zoxide bat eza lazygit git-delta fd ripgrep \
-  zsh-autosuggestions zsh-syntax-highlighting starship
+  zsh-autosuggestions zsh-syntax-highlighting starship gh
 
 echo "==> Symlinking configs..."
 
