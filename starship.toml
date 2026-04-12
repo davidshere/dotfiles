@@ -1,5 +1,5 @@
 format = """
-[ $os $username ](bg:#a9a1e1 fg:#090c0c)\
+[ $os ](bg:#a9a1e1 fg:#090c0c)\
 [](bg:#7aa2f7 fg:#a9a1e1)\
 [ $directory ](bg:#7aa2f7 fg:#090c0c)\
 [](fg:#7aa2f7 bg:#394b70)\
@@ -41,5 +41,5 @@ disabled = false
 style = "bg:#a9a1e1 fg:#090c0c"
 
 [os.symbols]
-Macos = ""
-Linux = ""
+Macos = "\uf179"
+Linux = "\uf17c"
