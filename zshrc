@@ -1,5 +1,5 @@
 # Path
-export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.docker/bin
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH:$HOME/.docker/bin
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
 # Oh My Zsh
@@ -13,9 +13,14 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# zsh plugins (via brew)
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# zsh plugins (path differs by OS)
+if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # fzf
 eval "$(fzf --zsh)"

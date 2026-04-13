@@ -33,7 +33,7 @@ install_linux() {
   echo "==> Installing apt packages..."
   sudo apt-get update -qq
   sudo apt-get install -y \
-    fzf ripgrep fd-find \
+    zsh fzf ripgrep fd-find \
     zsh-autosuggestions zsh-syntax-highlighting
 
   # fd-find installs as fdfind; symlink to fd if not already present
@@ -71,7 +71,13 @@ install_linux() {
   curl -fsSL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
   echo "==> Installing starship..."
-  curl -fsSL https://starship.rs/install.sh | sh
+  curl -fsSL https://starship.rs/install.sh | sh -s -- --yes
+
+  echo "==> Setting default shell to zsh..."
+  if [ "$(basename "$SHELL")" != "zsh" ]; then
+    chsh -s "$(which zsh)"
+    echo "  Default shell changed to zsh. Log out and back in for it to take effect."
+  fi
 }
 
 # ── Detect OS and install ──────────────────────────────────────────────────────
