@@ -71,9 +71,8 @@ alias tree="eza --tree --icons"
 # git
 alias lg="lazygit"
 
-# Personal
-alias wakepc='wakeonlan -i 192.168.7.255 2C:F0:5D:2D:4B:37'
-export PREFECT_API_URL=http://192.168.7.214:4200/api
+# Local overrides (machine-specific config, not committed)
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # Starship prompt (must be last)
 eval "$(starship init zsh)"
