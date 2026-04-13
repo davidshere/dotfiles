@@ -59,7 +59,8 @@ install_linux() {
   echo "==> Installing eza..."
   local eza_tag; eza_tag="$(gh_latest eza-community/eza)"
   curl -fsSL "https://github.com/eza-community/eza/releases/download/$eza_tag/eza_x86_64-unknown-linux-gnu.tar.gz" \
-    | sudo tar -xz -C /usr/local/bin eza
+    | tar -xz -C /tmp
+  sudo mv /tmp/eza /usr/local/bin/eza
 
   echo "==> Installing lazygit..."
   local tag; tag="$(gh_latest jesseduffield/lazygit)"
