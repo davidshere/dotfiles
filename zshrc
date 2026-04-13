@@ -1,6 +1,13 @@
 # Path
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH:$HOME/.docker/bin
-export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+
+# macOS extras
+if [[ "$(uname)" == "Darwin" ]]; then
+  export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+fi
+
+# Go
+export PATH=$PATH:/usr/local/go/bin
 
 # Oh My Zsh
 export ZSH="$HOME/.oh-my-zsh"
@@ -23,27 +30,38 @@ elif [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
 fi
 
 # fzf
-eval "$(fzf --zsh)"
+command -v fzf >/dev/null && eval "$(fzf --zsh)"
 
 # zoxide (smarter cd)
-eval "$(zoxide init zsh)"
-alias cd="z"
+if command -v zoxide >/dev/null; then
+  eval "$(zoxide init zsh)"
+  alias cd="z"
+fi
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+if command -v pyenv >/dev/null || [ -d "$PYENV_ROOT" ]; then
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
 
 # rbenv
-eval "$(rbenv init -)"
+command -v rbenv >/dev/null && eval "$(rbenv init -)"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
 
 # Editor
 export EDITOR="nvim"
 alias vim="nvim"
+alias python="python3"
 
-# bat (cat replacement) with TokyoNight
-export BAT_THEME="tokyonight_night"
+# bat (cat replacement)
 alias cat="bat"
+alias less="bat --paging=always"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # eza (ls replacement)
 alias ls="eza --icons"
@@ -52,11 +70,6 @@ alias tree="eza --tree --icons"
 
 # git
 alias lg="lazygit"
-git config --global core.pager delta
-git config --global delta.navigate true
-git config --global delta.dark true
-git config --global delta.syntax-theme "tokyonight_night"
-git config --global interactive.diffFilter "delta --color-only"
 
 # Personal
 alias wakepc='wakeonlan -i 192.168.7.255 2C:F0:5D:2D:4B:37'

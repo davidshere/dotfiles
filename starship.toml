@@ -42,4 +42,3 @@ style = "bg:#a9a1e1 fg:#090c0c"
 
 [os.symbols]
 Macos = "\uf179"
-Linux = "\uf17c"
