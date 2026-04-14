@@ -33,7 +33,7 @@ install_linux() {
   echo "==> Installing apt packages..."
   sudo apt-get update -qq
   sudo apt-get install -y \
-    zsh fzf ripgrep fd-find \
+    zsh ripgrep fd-find \
     zsh-autosuggestions zsh-syntax-highlighting
 
   # fd-find installs as fdfind; symlink to fd if not already present
@@ -68,8 +68,19 @@ install_linux() {
   curl -fsSL "https://github.com/jesseduffield/lazygit/releases/download/$tag/lazygit_${ver}_Linux_x86_64.tar.gz" \
     | sudo tar -xz -C /usr/local/bin lazygit
 
+  echo "==> Installing fzf..."
+  local fzf_tag; fzf_tag="$(gh_latest junegunn/fzf)"
+  local fzf_ver="${fzf_tag#v}"
+  curl -fsSL "https://github.com/junegunn/fzf/releases/download/$fzf_tag/fzf-${fzf_ver}-linux_amd64.tar.gz" \
+    | sudo tar -xz -C /usr/local/bin fzf
+
   echo "==> Installing zoxide..."
   curl -fsSL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
+  echo "==> Installing oh-my-zsh..."
+  if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  fi
 
   echo "==> Installing starship..."
   curl -fsSL https://starship.rs/install.sh | sh -s -- --yes

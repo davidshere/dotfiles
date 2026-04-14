@@ -29,8 +29,15 @@ elif [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-# fzf
-command -v fzf >/dev/null && eval "$(fzf --zsh)"
+# fzf (--zsh flag requires 0.48+; fall back to sourcing scripts for older apt installs)
+if command -v fzf >/dev/null; then
+  if fzf --zsh &>/dev/null; then
+    eval "$(fzf --zsh)"
+  elif [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+    source /usr/share/doc/fzf/examples/completion.zsh
+  fi
+fi
 
 # zoxide (smarter cd)
 if command -v zoxide >/dev/null; then
