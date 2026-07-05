@@ -7,6 +7,38 @@ workflow that covers the one thing VSCode's extension was providing that the
 bare CLI doesn't: a side-by-side, multi-file diff review of changes Claude
 proposes, before they're accepted.
 
+## What changes for the user, concretely
+
+Today: `claude` runs in a plain terminal (in VSCode's integrated terminal or
+any shell). Edits show up as text diffs in the transcript, approved/denied
+with a keypress. This mode is not being replaced — it still works exactly the
+same anywhere `claude` runs, including a bare terminal outside tmux/nvim.
+
+After this build, there are three ways to invoke Claude Code, for three
+different situations:
+
+1. **Plain CLI, unchanged** — run `claude` directly in any shell. Same
+   transcript-based diff approval as today. Use when nvim isn't involved at
+   all (e.g. answering a question, working outside a repo).
+
+2. **tmux popup (`prefix+c`)** — a floating `claude` over whatever pane
+   you're in, for quick one-offs. Still plain CLI-mode diffs/approval inside
+   the popup. Exits and vanishes when you quit Claude. Use for fast
+   questions where you don't need to review file changes visually.
+
+3. **Neovim-attached (`<leader>ac`), new** — only when you're editing in
+   LazyVim. Claude Code runs as before, but claudecode.nvim intercepts each
+   file edit and opens it as a native Neovim diff buffer (old vs. new)
+   instead of a text diff in a transcript. If Claude touches multiple files
+   in one turn, you get one diff buffer per file to step through
+   (`<leader>an`/`<leader>ap`), accepting or rejecting each
+   (`<leader>aa`/`<leader>ar`) — this is the part that replaces what VSCode's
+   changed-files diff view was giving you.
+
+Nothing forces mode 3. If you're mid-conversation in plain CLI mode (as in
+this session), that experience is untouched — the new review flow only
+kicks in when Claude Code is attached to a running Neovim instance.
+
 ## Components
 
 ### 1. `nvim/lua/plugins/claudecode.lua`
