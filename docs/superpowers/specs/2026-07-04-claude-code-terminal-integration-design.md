@@ -7,6 +7,10 @@ workflow that covers the one thing VSCode's extension was providing that the
 bare CLI doesn't: a side-by-side, multi-file diff review of changes Claude
 proposes, before they're accepted.
 
+Along the way, actually start using `lazygit` and `delta`, which are already
+installed and configured in the dotfiles but currently unused day-to-day —
+the cheat sheet should teach these, not just the new Claude Code pieces.
+
 ## What changes for the user, concretely
 
 Today: `claude` runs in a plain terminal (in VSCode's integrated terminal or
@@ -83,19 +87,27 @@ A one-page reference covering:
   no editor context needed)
 - The nvim plugin keymaps and when to use them (working inside a file,
   want inline diff review)
-- The basic workflow loop: ask Claude something → it edits files → review
-  diffs in Neovim → accept/reject → `git add` / `git commit` as normal
-  (`git diff` is already piped through delta per your zshrc, so it's
-  colorized even though you invoke it as plain `git diff`; `lazygit` is
-  installed but not part of your actual workflow, so the cheat sheet won't
-  feature it)
+- **What `lazygit` and `delta` actually are and how to use them**, since
+  they're configured but unfamiliar:
+  - `delta` is already your git pager (configured in `zshrc`), so plain
+    `git diff` output is colorized/side-by-side through it — no new command
+    to learn, just an explanation of why `git diff` looks the way it does.
+  - `lazygit` (aliased `lg`) is a terminal UI for staging and committing:
+    a file list you navigate with arrow keys, `space` to stage/unstage,
+    a diff pane (rendered via delta) for the selected file, and `c` to
+    commit. The cheat sheet will give a short "first five commands" primer
+    (navigate, stage, view diff, commit, quit).
+- The updated workflow loop: ask Claude something → it edits files → review
+  diffs in Neovim (`claudecode.nvim`) → accept/reject → open `lazygit`
+  (`lg`) to stage and commit, using its diff pane as a final pre-commit
+  review
 
 Not symlinked by `install.sh` — it's documentation, not a dotfile.
 
 ## Out of scope
 
-- Changing how commits/git review work (plain `git` commands stay as-is;
-  delta stays configured as pager, lazygit stays installed but unused)
+- Changing the `lazygit`/`delta` configuration itself (both already work;
+  this is purely about documenting/teaching the existing setup)
 - Any VSCode-specific config removal (user can uninstall/stop using VSCode
   manually once comfortable)
 - Automating Claude Code permission modes/settings — this is purely about
