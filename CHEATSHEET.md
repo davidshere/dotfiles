@@ -9,14 +9,20 @@ Run `claude` in any shell. Works exactly as it always has — edits show up
 as text diffs in the transcript, approved/denied with a keypress. Use this
 when you're not inside tmux/nvim, or just want to ask a question.
 
-## 2. tmux window — `prefix + a`
+## 2. tmux popup — `prefix + a`
 
-Switches to a dedicated `claude` window (creating it the first time, in
-your current pane's directory). Claude keeps running in the background
-when you switch away — `prefix + a` again, or any normal window switch
-(`prefix + p`/`prefix + n`, or a window number), returns to it without
-losing the session. Use this for an ongoing terminal chat alongside your
-editor, with no file/diff awareness (that's Neovim, below).
+Opens a floating `claude`, backed by a detached tmux session (`claude`) so
+it survives closing the popup:
+
+- **Leave without killing Claude:** press `prefix + d` inside the popup —
+  this detaches the inner session (not your whole tmux client), the popup
+  closes, and Claude keeps running in the background.
+- **Come back:** `prefix + a` again reattaches to the same session instead
+  of starting a fresh one.
+- **Actually quit:** `/exit` or Ctrl-D inside Claude ends the session for
+  good; the next `prefix + a` starts a new one.
+
+No file/diff awareness here — that's Neovim, below.
 
 ## 3. Neovim-attached (claudecode.nvim)
 
@@ -55,7 +61,7 @@ Both are already installed and configured (`zshrc`) but easy to have missed:
 
 ## Putting it together
 
-Ask Claude something (CLI, tmux window, or nvim) → it edits files → review
+Ask Claude something (CLI, popup, or nvim) → it edits files → review
 the diffs (transcript, or Neovim diff buffers if using claudecode.nvim) →
 open `lg` to stage and commit, using its diff pane as a final pre-commit
 check.
