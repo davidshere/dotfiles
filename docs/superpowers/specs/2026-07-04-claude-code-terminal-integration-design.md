@@ -34,10 +34,9 @@ different situations:
    LazyVim. Claude Code runs as before, but claudecode.nvim intercepts each
    file edit and opens it as a native Neovim diff buffer (old vs. new)
    instead of a text diff in a transcript. If Claude touches multiple files
-   in one turn, you get one diff buffer per file to step through
-   (`<leader>an`/`<leader>ap`), accepting or rejecting each
-   (`<leader>aa`/`<leader>ar`) — this is the part that replaces what VSCode's
-   changed-files diff view was giving you.
+   in one turn, each opens as its own diff buffer; accept with `:w` or
+   `<leader>aa`, reject with `:q` or `<leader>ad` — this is the part that
+   replaces what VSCode's changed-files diff view was giving you.
 
 Nothing forces mode 3. If you're mid-conversation in plain CLI mode (as in
 this session), that experience is untouched — the new review flow only
@@ -47,10 +46,11 @@ kicks in when Claude Code is attached to a running Neovim instance.
 
 ### 1. `nvim/lua/plugins/claudecode.lua`
 
-New LazyVim plugin spec adding [`coder/claudecode.nvim`](https://github.com/coder/claudecode.nvim).
-It runs Claude Code as a companion process (via its MCP/WebSocket protocol)
-and opens each file Claude touches as a native Neovim diff buffer, so changes
-across multiple files can be reviewed and accepted/rejected like the VSCode
+New LazyVim plugin spec adding [`coder/claudecode.nvim`](https://github.com/coder/claudecode.nvim)
+(depends on `folke/snacks.nvim`, already bundled with LazyVim). It runs
+Claude Code as a companion process via its WebSocket/MCP protocol and opens
+each file Claude touches as a native Neovim diff buffer, so changes across
+multiple files can be reviewed and accepted/rejected like the VSCode
 extension's changed-files view — without leaving Neovim.
 
 Keymaps live under `<leader>a` (LazyVim's convention for AI-tool groupings,
@@ -58,15 +58,15 @@ mirroring `<leader>f` for find, `<leader>g` for git):
 
 | Keymap | Action |
 |---|---|
-| `<leader>ac` | Toggle Claude Code chat/terminal split |
-| `<leader>aa` | Accept current diff hunk/file |
-| `<leader>ar` | Reject current diff hunk/file |
-| `<leader>an` | Next diff hunk |
-| `<leader>ap` | Previous diff hunk |
+| `<leader>ac` | Toggle Claude Code terminal split |
+| `<leader>af` | Focus Claude Code terminal |
+| `<leader>ab` | Add current buffer to Claude's context |
+| `<leader>as` | Send visual selection to Claude (visual mode) |
+| `<leader>aa` | Accept current diff (same as `:w`) |
+| `<leader>ad` | Reject current diff (same as `:q`) |
 
-Exact keymap names/defaults will be finalized against the plugin's actual API
-during implementation (the table above is the intended shape, not a
-guarantee of the plugin's literal function names).
+These are the plugin's own documented keymaps/commands (`:ClaudeCode`,
+`:ClaudeCodeDiffAccept`/`:ClaudeCodeDiffDeny`, etc.) — not invented names.
 
 ### 2. `tmux.conf`
 
