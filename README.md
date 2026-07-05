@@ -2,6 +2,9 @@
 
 Personal macOS/Ubuntu developer environment. Managed with symlinks via `install.sh`.
 
+For deeper, example-driven usage of every tool below, see
+[docs/tools.md](docs/tools.md).
+
 ## Bootstrap
 
 ```bash
@@ -88,6 +91,56 @@ Mouse support on. Windows and panes numbered from 1.
 - **`lg`** — lazygit: full TUI for staging, committing, rebasing, diffing
 - **`delta`** — syntax-highlighted diffs in `git diff` / `git log -p`
 - **`gh`** — GitHub CLI for PRs, issues, and releases from the terminal
+
+---
+
+## Claude Code
+
+Three ways to use Claude Code from the terminal:
+
+### 1. Plain CLI
+
+Run `claude` in any shell. Works exactly as it always has — edits show up
+as text diffs in the transcript, approved/denied with a keypress. Use this
+when you're not inside tmux/nvim, or just want to ask a question.
+
+### 2. tmux popup — `prefix + a`
+
+Opens a floating `claude`, backed by a detached tmux session (`claude`) so
+it survives closing the popup:
+
+- **Leave without killing Claude:** press `prefix + d` inside the popup —
+  this detaches the inner session (not your whole tmux client), the popup
+  closes, and Claude keeps running in the background.
+- **Come back:** `prefix + a` again reattaches to the same session instead
+  of starting a fresh one.
+- **Actually quit:** `/exit` or Ctrl-D inside Claude ends the session for
+  good; the next `prefix + a` starts a new one.
+
+No file/diff awareness here — that's Neovim, below.
+
+### 3. Neovim-attached (claudecode.nvim)
+
+Claude's file edits open as native Neovim diff buffers (old vs. new)
+instead of terminal text — the multi-file review VSCode gave you.
+
+| Keymap | Action |
+|---|---|
+| `<leader>ac` | Toggle the Claude Code terminal split |
+| `<leader>af` | Focus the Claude Code terminal |
+| `<leader>ab` | Add the current buffer to Claude's context |
+| `<leader>as` (visual mode) | Send the selected text to Claude |
+| `<leader>aa` | Accept the current diff (same as `:w`) |
+| `<leader>ad` | Reject the current diff (same as `:q`) |
+
+Workflow: open the file(s) you're working on, `<leader>ac` to start
+chatting, let Claude edit, review each file's diff buffer, `<leader>aa`/`:w`
+or `<leader>ad`/`:q` per file.
+
+**Putting it together:** ask Claude something (CLI, popup, or nvim) → it
+edits files → review the diffs (transcript, or Neovim diff buffers if using
+claudecode.nvim) → open `lg` to stage and commit, using its diff pane as a
+final pre-commit check.
 
 ---
 
