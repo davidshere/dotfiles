@@ -84,14 +84,18 @@ A one-page reference covering:
 - The nvim plugin keymaps and when to use them (working inside a file,
   want inline diff review)
 - The basic workflow loop: ask Claude something → it edits files → review
-  diffs in Neovim → accept/reject → commit via lazygit (existing tool,
-  unchanged)
+  diffs in Neovim → accept/reject → `git add` / `git commit` as normal
+  (`git diff` is already piped through delta per your zshrc, so it's
+  colorized even though you invoke it as plain `git diff`; `lazygit` is
+  installed but not part of your actual workflow, so the cheat sheet won't
+  feature it)
 
 Not symlinked by `install.sh` — it's documentation, not a dotfile.
 
 ## Out of scope
 
-- Changing how commits/git review work (lazygit + delta stay as-is)
+- Changing how commits/git review work (plain `git` commands stay as-is;
+  delta stays configured as pager, lazygit stays installed but unused)
 - Any VSCode-specific config removal (user can uninstall/stop using VSCode
   manually once comfortable)
 - Automating Claude Code permission modes/settings — this is purely about
