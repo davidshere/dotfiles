@@ -25,7 +25,7 @@ gh_deb() {
 
 install_macos() {
   echo "==> Installing brew packages..."
-  brew install fzf zoxide bat eza lazygit git-delta fd ripgrep \
+  brew install fzf zoxide bat eza lazygit git-delta fd ripgrep glow \
     zsh-autosuggestions zsh-syntax-highlighting starship gh
 }
 
@@ -55,6 +55,9 @@ install_linux() {
 
   echo "==> Installing git-delta..."
   gh_deb "dandavison/delta" "git-delta_\${ver}_amd64.deb"
+
+  echo "==> Installing glow..."
+  gh_deb "charmbracelet/glow" "glow_\${ver}_amd64.deb"
 
   echo "==> Installing eza..."
   local eza_tag; eza_tag="$(gh_latest eza-community/eza)"

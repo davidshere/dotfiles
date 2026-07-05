@@ -70,6 +70,12 @@ alias cat="bat"
 alias less="bat --paging=always"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+# glow (markdown renderer) - `mdview file.md` to preview rendered markdown
+mdview() {
+  echo "Rendering $1 with glow..." >&2
+  glow -p "$@"
+}
+
 # eza (ls replacement)
 alias ls="eza --icons"
 alias ll="eza --icons -la --git"
@@ -83,3 +89,4 @@ alias lg="lazygit"
 
 # Starship prompt (must be last)
 eval "$(starship init zsh)"
+
