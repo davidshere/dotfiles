@@ -3,7 +3,8 @@
 Personal macOS/Ubuntu developer environment. Managed with symlinks via `install.sh`.
 
 For deeper, example-driven usage of every tool below, see
-[docs/tools.md](docs/tools.md).
+[docs/tools.md](docs/tools.md). New to modal editing (buffers, windows,
+motions)? Start with [docs/vim-basics.md](docs/vim-basics.md).
 
 ## Bootstrap
 
