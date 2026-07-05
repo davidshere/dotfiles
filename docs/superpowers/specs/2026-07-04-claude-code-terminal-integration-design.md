@@ -25,7 +25,7 @@ different situations:
    transcript-based diff approval as today. Use when nvim isn't involved at
    all (e.g. answering a question, working outside a repo).
 
-2. **tmux popup (`prefix+c`)** — a floating `claude` over whatever pane
+2. **tmux popup (`prefix+a`)** — a floating `claude` over whatever pane
    you're in, for quick one-offs. Still plain CLI-mode diffs/approval inside
    the popup. Exits and vanishes when you quit Claude. Use for fast
    questions where you don't need to review file changes visually.
@@ -74,11 +74,13 @@ Add a popup keybind so Claude Code can be summoned over any pane without
 window/pane management:
 
 ```
-bind-key c display-popup -E -d "#{pane_current_path}" "claude"
+bind-key a display-popup -E -d "#{pane_current_path}" "claude"
 ```
 
-`prefix + c` opens a floating popup running `claude` in the current pane's
+`prefix + a` opens a floating popup running `claude` in the current pane's
 working directory; exiting Claude Code closes the popup automatically (`-E`).
+(Not `prefix+c` — that's tmux's default "new window" binding, which the user
+already relies on and is not being overridden.)
 
 ### 3. `CHEATSHEET.md` (repo root)
 
