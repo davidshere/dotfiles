@@ -25,7 +25,7 @@ gh_deb() {
 
 install_macos() {
   echo "==> Installing brew packages..."
-  brew install fzf zoxide bat eza lazygit git-delta fd ripgrep glow \
+  brew install fzf bat eza lazygit git-delta fd ripgrep glow \
     zsh-autosuggestions zsh-syntax-highlighting starship gh
 }
 
@@ -76,9 +76,6 @@ install_linux() {
   local fzf_ver="${fzf_tag#v}"
   curl -fsSL "https://github.com/junegunn/fzf/releases/download/$fzf_tag/fzf-${fzf_ver}-linux_amd64.tar.gz" \
     | sudo tar -xz -C /usr/local/bin fzf
-
-  echo "==> Installing zoxide..."
-  curl -fsSL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
   echo "==> Installing oh-my-zsh..."
   if [ ! -d "$HOME/.oh-my-zsh" ]; then

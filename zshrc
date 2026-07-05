@@ -39,12 +39,6 @@ if command -v fzf >/dev/null; then
   fi
 fi
 
-# zoxide (smarter cd)
-if command -v zoxide >/dev/null; then
-  eval "$(zoxide init zsh)"
-  alias cd="z"
-fi
-
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 if command -v pyenv >/dev/null || [ -d "$PYENV_ROOT" ]; then

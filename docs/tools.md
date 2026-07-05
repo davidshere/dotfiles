@@ -8,7 +8,6 @@ this doc fills in the "how do I actually use this" gaps for everything else.
 
 - [Shell: zsh](#shell-zsh)
 - [fzf — fuzzy finder](#fzf--fuzzy-finder)
-- [zoxide — smarter cd](#zoxide--smarter-cd)
 - [eza — ls replacement](#eza--ls-replacement)
 - [bat — cat replacement](#bat--cat-replacement)
 - [ripgrep (rg) — fast search](#ripgrep-rg--fast-search)
@@ -57,28 +56,7 @@ Default keybindings:
 | `Alt+C` | Fuzzy-find a directory and `cd` into it. |
 | `**<Tab>` | Trigger completion, e.g. `vim **<Tab>` fuzzy-finds a file to open. |
 
-fzf is also the engine behind zoxide's interactive mode (`zi`, below) and
-shows up inside lazygit and many nvim pickers.
-
----
-
-## zoxide — smarter cd
-
-`cd` is aliased to `z` (zoxide). It tracks directories you visit and ranks
-them by frecency (frequency + recency), so a partial, even out-of-order,
-match jumps you there:
-
-```bash
-cd dot        # -> ~/src/dotfiles, once you've visited it before
-cd civic docs # -> matches ~/src/civic-docs even with a space instead of a dash
-```
-
-- `cd` with no args goes to `$HOME`, same as normal.
-- `cdi` / `zi` — interactive mode: fuzzy-pick from ranked matches via fzf
-  when you're not sure of the exact jump target.
-- `cd -` still works for "previous directory."
-- The database lives at `~/.local/share/zoxide/db.zo`; entries decay over
-  time if you stop visiting them.
+fzf also shows up inside lazygit and many nvim pickers.
 
 ---
 

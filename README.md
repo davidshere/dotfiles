@@ -22,7 +22,6 @@ Works on macOS (via Homebrew) and Ubuntu (via apt + GitHub releases). No Linuxbr
 
 - **Autocomplete** — start typing a command, press `→` to accept the suggestion
 - **Syntax highlighting** — commands turn green when valid, red when not
-- **Smarter `cd`** — `cd` is aliased to `zoxide`: type a partial directory name you've visited before and it jumps there (e.g. `cd dot` → `~/src/dotfiles`)
 - **Fuzzy search** — `Ctrl+R` fuzzy-searches your command history; `Ctrl+T` fuzzy-finds files
 
 ### Aliases
@@ -35,7 +34,6 @@ Works on macOS (via Homebrew) and Ubuntu (via apt + GitHub releases). No Linuxbr
 | `cat` | `bat` — syntax-highlighted file viewer with line numbers |
 | `vim` | neovim |
 | `lg` | lazygit |
-| `cd` | zoxide (smart jump) |
 
 ---
 

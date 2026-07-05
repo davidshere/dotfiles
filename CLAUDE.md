@@ -17,7 +17,7 @@ Personal dotfiles for macOS. Managed with symlinks via `install.sh`.
 - **Prompt**: starship with TokyoNight colorscheme
 - **Editor**: neovim with LazyVim distribution, TokyoNight theme
 - **Multiplexer**: tmux with tokyo-night-tmux and vim-tmux-navigator
-- **Key tools**: fzf, zoxide, bat, eza, lazygit, delta, ripgrep, fd
+- **Key tools**: fzf, bat, eza, lazygit, delta, ripgrep, fd
 
 ## Adding a new dotfile
 
