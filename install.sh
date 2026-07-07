@@ -27,6 +27,10 @@ install_macos() {
   echo "==> Installing brew packages..."
   brew install fzf zoxide bat eza lazygit git-delta fd ripgrep glow \
     zsh-autosuggestions zsh-syntax-highlighting starship gh
+
+  echo "==> Installing JetBrainsMono Nerd Font..."
+  brew install --cask font-jetbrains-mono-nerd-font
+  echo "  Set your terminal font to 'JetBrainsMono Nerd Font' for icons to render."
 }
 
 install_linux() {
@@ -80,13 +84,15 @@ install_linux() {
   echo "==> Installing zoxide..."
   curl -fsSL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
-  echo "==> Installing oh-my-zsh..."
-  if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  fi
-
   echo "==> Installing starship..."
   curl -fsSL https://starship.rs/install.sh | sh -s -- --yes
+
+  echo "==> Installing JetBrainsMono Nerd Font..."
+  mkdir -p ~/.local/share/fonts
+  curl -fsSL "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz" \
+    | tar -xJ -C ~/.local/share/fonts
+  fc-cache -f ~/.local/share/fonts >/dev/null 2>&1 || true
+  echo "  Set your terminal font to 'JetBrainsMono Nerd Font' for icons to render."
 
   echo "==> Setting default shell to zsh..."
   if [ "$(basename "$SHELL")" != "zsh" ]; then
