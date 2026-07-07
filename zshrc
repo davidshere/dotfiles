@@ -9,16 +9,11 @@ fi
 # Go
 export PATH=$PATH:/usr/local/go/bin
 
-# Oh My Zsh
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME=""  # Disabled in favor of starship
-
-plugins=(
-  git
-  colored-man-pages
-)
-
-source $ZSH/oh-my-zsh.sh
+# Completions (pick up Homebrew's completion functions on macOS)
+if [ -d /opt/homebrew/share/zsh/site-functions ]; then
+  FPATH="/opt/homebrew/share/zsh/site-functions:$FPATH"
+fi
+autoload -Uz compinit && compinit
 
 # zsh plugins (path differs by OS)
 if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
@@ -71,9 +66,11 @@ alias less="bat --paging=always"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # glow (markdown renderer) - `mdview file.md` to preview rendered markdown
+# Force the dark style: inside tmux glow's terminal-background detection fails
+# and it falls back to the light style (dark text -> invisible on a dark bg).
 mdview() {
   echo "Rendering $1 with glow..." >&2
-  glow -p "$@"
+  glow -s dark -p "$@"
 }
 
 # eza (ls replacement)
@@ -90,3 +87,5 @@ alias lg="lazygit"
 # Starship prompt (must be last)
 eval "$(starship init zsh)"
 
+
+. "$HOME/.local/bin/env"
