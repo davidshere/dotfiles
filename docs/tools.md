@@ -25,14 +25,12 @@ this doc fills in the "how do I actually use this" gaps for everything else.
 
 ## Shell: zsh
 
-Configured in `zshrc`, oh-my-zsh with the theme disabled (starship replaces
-it) and two plugins:
+Configured in `zshrc` — plain zsh, no framework. The prompt is starship and
+completions are initialized directly with `compinit` (picking up Homebrew's
+`site-functions` on macOS). Colorized man pages come for free via the `bat`
+`MANPAGER` set later in `zshrc`.
 
-- `git` — adds git aliases like `gst`, `gco`, `gp` (see oh-my-zsh git plugin
-  docs; run `alias | grep '^g'` to see what's active).
-- `colored-man-pages` — man pages get syntax highlighting.
-
-Plus two standalone plugins sourced directly (not via oh-my-zsh):
+Two plugins are sourced directly:
 
 - **zsh-autosuggestions** — as you type, a greyed-out suggestion appears
   based on history. Press `→` (or `End`) to accept it, or keep typing to
