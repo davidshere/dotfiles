@@ -74,9 +74,9 @@ mdview() {
 }
 
 # eza (ls replacement)
-alias ls="eza --icons"
-alias ll="eza --icons -la --git"
-alias tree="eza --tree --icons"
+alias ls="eza --icons=auto"
+alias ll="eza --icons=auto -la --git"
+alias tree="eza --tree --icons=auto"
 
 # git
 alias lg="lazygit"
