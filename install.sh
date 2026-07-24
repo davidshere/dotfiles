@@ -126,7 +126,9 @@ symlink() {
     mv "$dst" "$dst.bak"
   fi
 
-  ln -sf "$src" "$dst"
+  # -n so an existing symlink-to-directory is replaced, not dereferenced
+  # (otherwise the new link lands *inside* the target dir, e.g. nvim/nvim)
+  ln -sfn "$src" "$dst"
   echo "  $dst -> $src"
 }
 
