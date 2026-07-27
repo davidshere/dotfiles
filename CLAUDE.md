@@ -13,7 +13,7 @@ Personal dotfiles for macOS. Managed with symlinks via `install.sh`.
 
 ## Stack
 
-- **Shell**: zsh + oh-my-zsh (theme disabled) + starship prompt
+- **Shell**: zsh (no framework) + starship prompt
 - **Prompt**: starship with TokyoNight colorscheme
 - **Editor**: neovim with LazyVim distribution, TokyoNight theme
 - **Multiplexer**: tmux with tokyo-night-tmux and vim-tmux-navigator

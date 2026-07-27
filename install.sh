@@ -27,6 +27,10 @@ install_macos() {
   echo "==> Installing brew packages..."
   brew install fzf bat eza lazygit git-delta fd ripgrep glow \
     zsh-autosuggestions zsh-syntax-highlighting starship gh
+
+  echo "==> Installing JetBrainsMono Nerd Font..."
+  brew install --cask font-jetbrains-mono-nerd-font
+  echo "  Set your terminal font to 'JetBrainsMono Nerd Font' for icons to render."
 }
 
 install_linux() {
@@ -77,13 +81,15 @@ install_linux() {
   curl -fsSL "https://github.com/junegunn/fzf/releases/download/$fzf_tag/fzf-${fzf_ver}-linux_amd64.tar.gz" \
     | sudo tar -xz -C /usr/local/bin fzf
 
-  echo "==> Installing oh-my-zsh..."
-  if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  fi
-
   echo "==> Installing starship..."
   curl -fsSL https://starship.rs/install.sh | sh -s -- --yes
+
+  echo "==> Installing JetBrainsMono Nerd Font..."
+  mkdir -p ~/.local/share/fonts
+  curl -fsSL "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz" \
+    | tar -xJ -C ~/.local/share/fonts
+  fc-cache -f ~/.local/share/fonts >/dev/null 2>&1 || true
+  echo "  Set your terminal font to 'JetBrainsMono Nerd Font' for icons to render."
 
   echo "==> Setting default shell to zsh..."
   if [ "$(basename "$SHELL")" != "zsh" ]; then
@@ -117,7 +123,9 @@ symlink() {
     mv "$dst" "$dst.bak"
   fi
 
-  ln -sf "$src" "$dst"
+  # -n so an existing symlink-to-directory is replaced, not dereferenced
+  # (otherwise the new link lands *inside* the target dir, e.g. nvim/nvim)
+  ln -sfn "$src" "$dst"
   echo "  $dst -> $src"
 }
 
